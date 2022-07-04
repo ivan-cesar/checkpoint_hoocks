@@ -4,7 +4,7 @@ const UsersList = ({users, setUsers, setEditUser}) => {
     const handleDelete = (id) =>{
         let index;
         let newstate = [...users]
-        index = newstate.findIndex((user)=>user.id == id);
+        index = newstate.findIndex((user)=>user.id === id);
         newstate.splice(index,1);
         setUsers(newstate);
     };
