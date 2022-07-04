@@ -108,3 +108,15 @@ button:focus{
 .hr{
   margin-top: 20px;
 }
+
+.prof{
+  width: 30px;
+  margin-right: 10px
+}
+.name{
+  margin-right: 10px;
+}
+.ico{
+  position: relative;
+  left: 13rem;
+}

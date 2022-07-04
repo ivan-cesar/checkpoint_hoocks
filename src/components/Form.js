@@ -1,15 +1,33 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {v4 as uuidv4} from 'uuid';
 
-const Form = ({input,setInput,users,setUsers}) => {
+const Form = ({input,setInput,users,setUsers,editUser,setEditUser}) => {
+    const updateUser = (nom, id) =>{
+        const newUser = users.map((user)=>
+            user.id === id ? { nom, id } : user
+        );
+        setUsers(newUser);
+        setEditUser('');
+    }
     const onInputChange = (event) =>{
         setInput(event.target.value);
-
     };
+    useEffect(()=>{
+        if (editUser) {
+            setInput(editUser.nom)
+        } else {
+            setInput("")
+        }
+    },[setInput,editUser]);
     const onFormSubmit = (event) =>{
         event.preventDefault();
-        setUsers([...users,{id: uuidv4(), nom: input, image:"https://www.facebook.com/TechCabal/photos/a.188414161305597/603601679786841"}]);
-        setInput('');
+        if (!editUser) {
+            setUsers([...users,{id: new Date(), nom: input, image:"https://raw.githubusercontent.com/reactjs/reactjs.org/main/src/icons/logo.svg"}]);
+            setInput('');
+        } else {
+            updateUser(input,editUser.id)
+            
+        }
     };
     return(
         <form onSubmit={onFormSubmit}>
